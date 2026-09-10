@@ -7,6 +7,9 @@ import com.example.accountservice.dto.OpenSavingsAccountResponse;
 import com.example.accountservice.entity.Account;
 import com.example.accountservice.entity.AccountTransaction;
 import com.example.accountservice.entity.SavingsAccount;
+import com.example.accountservice.exception.AccountAlreadyExistsException;
+import com.example.accountservice.exception.CustomerNotActiveException;
+import com.example.accountservice.exception.InsufficientFundsException;
 import com.example.accountservice.repository.AccountRepository;
 import com.example.accountservice.repository.AccountTransactionRepository;
 import com.example.accountservice.repository.SavingsAccountRepository;
@@ -42,10 +45,9 @@ public class SavingsAccountServiceImpl
 
         // Make sure customer is active
         if (!"ACTIVE".equals(customer.status())) {
-            //TODO: later
-//            throw new BusinessException(
-//                    "Customer is not active"
-//            );
+            throw new CustomerNotActiveException(
+                    "Customer is not active"
+            );
         }
 
         // Check if customer already has savings account
@@ -58,10 +60,9 @@ public class SavingsAccountServiceImpl
                         );
 
         if (exists) {
-            //TODO: Later
-//            throw new BusinessException(
-//                    "Customer already has an active savings account"
-//            );
+            throw new AccountAlreadyExistsException(
+                    "Customer already has an active savings account"
+            );
         }
 
         UUID accountId = UUID.randomUUID();
@@ -125,10 +126,9 @@ public class SavingsAccountServiceImpl
         if (amount == null ||
                 amount.compareTo(BigDecimal.ZERO) < 0) {
 
-            //TODO later
-//            throw new BusinessException(
-//                    "Initial deposit cannot be negative"
-//            );
+            throw new InsufficientFundsException(
+                    "Initial deposit cannot be negative"
+            );
         }
     }
 
