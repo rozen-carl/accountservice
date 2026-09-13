@@ -65,8 +65,6 @@ public class SavingsAccountServiceImpl
             );
         }
 
-        UUID accountId = UUID.randomUUID();
-
         String accountNumber =
                 accountNumberService
                         .generateUniqueAccountNumber();
@@ -75,7 +73,6 @@ public class SavingsAccountServiceImpl
                 request.initialDeposit();
 
         Account account = Account.builder()
-                .id(accountId)
                 .customerId(customer.id())
                 .accountNumber(accountNumber)
                 .accountType(Account.AccountType.SAVINGS)

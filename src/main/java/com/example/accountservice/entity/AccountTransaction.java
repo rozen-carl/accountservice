@@ -9,7 +9,6 @@ import java.util.UUID;
 
 @Entity
 @Table(
-        name = "account_transactions",
         uniqueConstraints = {
                 @UniqueConstraint(
                         name = "uk_transaction_reference",

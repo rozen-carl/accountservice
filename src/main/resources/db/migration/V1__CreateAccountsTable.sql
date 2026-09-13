@@ -1,4 +1,4 @@
-CREATE TABLE accounts
+CREATE TABLE account
 (
     id                 BINARY(16) NOT NULL,
 
@@ -18,7 +18,7 @@ CREATE TABLE accounts
 
     created_date       TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    last_modified_date TIMESTAMP      NOT NULL
+    updated_date TIMESTAMP      NOT NULL
                                                DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
 
     PRIMARY KEY (id),
@@ -26,7 +26,7 @@ CREATE TABLE accounts
     CONSTRAINT uk_accounts_account_number
         UNIQUE (account_number),
 
-    INDEX              idx_accounts_customer_id (customer_id),
-    INDEX              idx_accounts_status (status),
-    INDEX              idx_accounts_account_type (account_type)
+    INDEX              idx_account_customer_id (customer_id),
+    INDEX              idx_account_status (status),
+    INDEX              idx_account_account_type (account_type)
 );

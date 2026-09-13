@@ -1,4 +1,4 @@
-CREATE TABLE savings_accounts
+CREATE TABLE savings_account
 (
     account_id      BINARY(16) NOT NULL,
 
@@ -12,6 +12,6 @@ CREATE TABLE savings_accounts
 
     CONSTRAINT fk_savings_accounts_account
         FOREIGN KEY (account_id)
-            REFERENCES accounts (id)
+            REFERENCES account (id)
             ON DELETE CASCADE
 );

@@ -16,7 +16,7 @@ CREATE TABLE account_status_history
 
     CONSTRAINT fk_status_history_account
         FOREIGN KEY (account_id)
-            REFERENCES accounts (id),
+            REFERENCES account (id),
 
     INDEX           idx_status_history_account_id (account_id)
 );

@@ -1,4 +1,4 @@
-CREATE TABLE account_transactions
+CREATE TABLE account_transaction
 (
     id                    BINARY(16) NOT NULL,
 
@@ -27,7 +27,7 @@ CREATE TABLE account_transactions
 
     CONSTRAINT fk_transactions_account
         FOREIGN KEY (account_id)
-            REFERENCES accounts (id),
+            REFERENCES account (id),
 
     INDEX                 idx_transactions_account_id (account_id),
     INDEX                 idx_transactions_transaction_date (transaction_date)
