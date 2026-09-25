@@ -65,10 +65,6 @@ public class AccountTransaction {
     public enum TransactionType {
 
         INITIAL_DEPOSIT,
-        DEPOSIT,
-        WITHDRAWAL,
-        TRANSFER_IN,
-        TRANSFER_OUT,
-        INTEREST
+        TRANSFER
     }
 }

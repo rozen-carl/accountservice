@@ -66,6 +66,45 @@ public class GlobalExceptionHandler {
                 ));
     }
 
+    @ExceptionHandler(InvalidTransferAmountException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidTransferAmount(
+            InvalidTransferAmountException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new ApiErrorResponse(
+                        "ACCOUNT_INVALID_TRANSFER_AMOUNT",
+                        ex.getMessage(),
+                        Instant.now()
+                ));
+    }
+
+    @ExceptionHandler(InvalidTransferException.class)
+    public ResponseEntity<ApiErrorResponse> handleInvalidTransfer(
+            InvalidTransferException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new ApiErrorResponse(
+                        "ACCOUNT_INVALID_TRANSFER",
+                        ex.getMessage(),
+                        Instant.now()
+                ));
+    }
+
+    @ExceptionHandler(AccountNotFoundException.class)
+    public ResponseEntity<ApiErrorResponse> handleAccountNotFound(
+            AccountNotFoundException ex) {
+
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(new ApiErrorResponse(
+                        "ACCOUNT_NOT_FOUND",
+                        ex.getMessage(),
+                        Instant.now()
+                ));
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiErrorResponse> handleGenericException(
             Exception ex) {
