@@ -6,22 +6,15 @@ import java.math.BigDecimal;
 import java.time.Instant;
 import java.util.UUID;
 
-public record OpenSavingsAccountResponse(
+public record OpenAccountResponse(
 
         UUID accountId,
-
         String accountNumber,
-
         Account.AccountType accountType,
-
         Account.AccountStatus status,
-
         String currency,
-
         BigDecimal balance,
-
         BigDecimal interestRate,
-
         Instant createdDate
 ) {
 }

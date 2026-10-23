@@ -11,9 +11,6 @@ public record AccountTransferRequest(
 
         BigDecimal amount,
 
-        String currency,
-
-        String transferReference
-
+        String currency
 ) {
 }

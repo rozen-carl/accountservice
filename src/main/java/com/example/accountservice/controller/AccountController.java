@@ -1,34 +1,42 @@
 package com.example.accountservice.controller;
 
 import com.example.accountservice.dto.AccountResponse;
-import com.example.accountservice.dto.OpenSavingsAccountRequest;
-import com.example.accountservice.dto.OpenSavingsAccountResponse;
+import com.example.accountservice.dto.OpenAccountRequest;
+import com.example.accountservice.dto.OpenAccountResponse;
 import com.example.accountservice.service.AccountService;
-import com.example.accountservice.service.SavingsAccountService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.nio.file.AccessDeniedException;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/v1/accounts/savings")
+@RequestMapping("/api/v1/accounts")
 @RequiredArgsConstructor
-public class SavingsAccountController {
-
-    private final SavingsAccountService savingsAccountService;
+public class AccountController {
 
     private final AccountService accountService;
 
     @PostMapping
-    public ResponseEntity<OpenSavingsAccountResponse> openAccount(
-            @Valid @RequestBody OpenSavingsAccountRequest request) {
+    public ResponseEntity<OpenAccountResponse> openAccount(
+            @Valid @RequestBody OpenAccountRequest request,
+            HttpServletRequest httpRequest ) throws AccessDeniedException {
 
-        OpenSavingsAccountResponse response =
-                savingsAccountService.openAccount(request);
+        UUID customerId =
+                (UUID) httpRequest.getAttribute("customerId");
+
+        if (customerId == null) {
+            throw new AccessDeniedException(
+                    "Customer identity is unavailable");
+        }
+
+        OpenAccountResponse response =
+                accountService.openAccount(request, customerId);
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)

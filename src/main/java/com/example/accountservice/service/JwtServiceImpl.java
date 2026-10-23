@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
+import java.util.UUID;
 
 @Service
 public class JwtServiceImpl implements JwtService {
@@ -26,6 +27,19 @@ public class JwtServiceImpl implements JwtService {
     @Override
     public String extractUsername(String token) {
         return extractAllClaims(token).getSubject();
+    }
+
+    @Override
+    public UUID extractCustomerId(String token) {
+        String customerId = extractAllClaims(token)
+                .get("customerId", String.class);
+
+        if (customerId == null || customerId.isBlank()) {
+            throw new IllegalArgumentException(
+                    "JWT does not contain customerId");
+        }
+
+        return UUID.fromString(customerId);
     }
 
     @Override

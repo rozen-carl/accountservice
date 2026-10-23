@@ -14,8 +14,6 @@ CREATE TABLE account
 
     balance            DECIMAL(19, 4) NOT NULL DEFAULT 0.0000,
 
-    available_balance  DECIMAL(19, 4) NOT NULL DEFAULT 0.0000,
-
     created_date       TIMESTAMP      NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     updated_date TIMESTAMP      NOT NULL

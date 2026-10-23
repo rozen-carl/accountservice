@@ -92,7 +92,7 @@ public class AccountTransferServiceImpl
                 request.currency(),
                 sourceBalanceBefore,
                 sourceBalanceAfter,
-                request.transferReference(),
+                generateAccountTransactionReference(),
                 "Transfer to own account"
         );
 
@@ -102,7 +102,7 @@ public class AccountTransferServiceImpl
                 request.currency(),
                 destinationBalanceBefore,
                 destinationBalanceAfter,
-                request.transferReference(),
+                generateAccountTransactionReference(),
                 "Transfer from own account"
         );
     }
@@ -199,5 +199,15 @@ public class AccountTransferServiceImpl
                     "Destination account currency does not match"
             );
         }
+    }
+
+    private String generateAccountTransactionReference() {
+
+        return "AT-" +
+                UUID.randomUUID()
+                        .toString()
+                        .replace("-", "")
+                        .substring(0, 20)
+                        .toUpperCase();
     }
 }

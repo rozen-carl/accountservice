@@ -13,7 +13,6 @@ public record AccountResponse(
         Account.AccountStatus status,
         String currency,
         BigDecimal balance,
-        BigDecimal availableBalance,
         Instant createdDate
 ) {
 }

@@ -46,9 +46,6 @@ public class Account extends BaseEntity {
     @Column
     private BigDecimal balance;
 
-    @Column
-    private BigDecimal availableBalance;
-
     public enum AccountType {
 
         SAVINGS,
