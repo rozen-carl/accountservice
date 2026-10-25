@@ -7,7 +7,8 @@ import java.time.Instant;
 import java.util.UUID;
 
 public record AccountResponse(
-        UUID accountId,
+        UUID id,
+        UUID customerId,
         String accountNumber,
         Account.AccountType accountType,
         Account.AccountStatus status,

@@ -9,6 +9,7 @@ import com.example.accountservice.entity.Account;
 import com.example.accountservice.entity.AccountTransaction;
 import com.example.accountservice.entity.SavingsAccount;
 import com.example.accountservice.exception.AccountAlreadyExistsException;
+import com.example.accountservice.exception.AccountNotFoundException;
 import com.example.accountservice.exception.CustomerNotActiveException;
 import com.example.accountservice.exception.InvalidInitialDepositException;
 import com.example.accountservice.repository.AccountRepository;
@@ -234,9 +235,29 @@ public class AccountServiceImpl implements AccountService {
                 .toList();
     }
 
+    @Override
+    public AccountResponse getAccountById(UUID accountId) {
+
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() ->
+                        new AccountNotFoundException("Account not found"));
+
+        return new AccountResponse(
+                account.getId(),
+                account.getCustomerId(),
+                account.getAccountNumber(),
+                account.getAccountType(),
+                account.getStatus(),
+                account.getCurrency(),
+                account.getBalance(),
+                account.getCreatedDate()
+        );
+    }
+
     private AccountResponse toResponse(Account account) {
         return new AccountResponse(
                 account.getId(),
+                account.getCustomerId(),
                 account.getAccountNumber(),
                 account.getAccountType(),
                 account.getStatus(),
